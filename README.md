@@ -1,7 +1,95 @@
 `raff` is a Python library and command-line utility for extensive reading and parsing of IFF-based container formats.
 
+# Usage
+
+Install the package.
+
+```$ pip install raff```
+
+Once installed, you can use the CLI tool directly from your terminal. Note: Currently, only the `--mode container` option is supported.
+
+Run the following command to see the help message:
+```bash
+$ raff --help
+usage: raff [-h] [--mode {container,chunk}] [--ignore [IGNORE ...]] [--show-payload] [source]
+
+IFF-based container/chunk parser utility.
+
+positional arguments:
+  source                Input file path. If omitted, binary data is read from standard input.
+
+options:
+  -h, --help            show this help message and exit
+  --mode {container,chunk}
+                        Parsing mode: 'container' returns raw container data (with payloads
+                        omitted unless --show-payload is used), while 'chunk' returns parsed
+                        chunk values.
+  --ignore [IGNORE ...]
+                        List of chunk identifiers to ignore (improves performance if unwanted
+                        chunks are skipped).
+  --show-payload        In container mode, include the payload in the output.
+```
+
+Using the CLI with a file and the `--ignore` and `--show-payload` options:
+
+```bash
+$ raff some_file.catalog --mode container --ignore STRS --show-payload 
+{
+  "master": {
+    "identifier": "FORM",
+    "size": 6598,
+    "type": "CTLG"
+  },
+  "FVER": {
+    "offset": 12,
+    "size": 38,
+    "payload": "JFZFUjogVElGRlZpZXcuY2F0YWxvZyAzLjEzICgxMi4xLjk2KQA="
+  },
+  "LANG": {
+    "offset": 58,
+    "size": 8,
+    "payload": "ZXNwYfFvbAA="
+  },
+  "CSET": {
+    "offset": 74,
+    "size": 32,
+    "payload": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+  }
+}
+```
+
+Using the CLI with piped input:
+
+```bash
+$ cat some_file.catalog | raff --mode container 
+{
+  "master": {
+    "identifier": "FORM",
+    "size": 6598,
+    "type": "CTLG"
+  },
+  "FVER": {
+    "offset": 12,
+    "size": 38
+  },
+  "LANG": {
+    "offset": 58,
+    "size": 8
+  },
+  "CSET": {
+    "offset": 74,
+    "size": 32
+  },
+  "STRS": {
+    "offset": 114,
+    "size": 6484
+  }
+}
+```
+
+You can also use `raff` as a library. Here's an example:
+
 ```py
-#: Example usage:
 from raff import Container
 
 #: File-like objects, raw bytes, or file paths are all valid inputs.
@@ -40,16 +128,17 @@ print(container.chunk("fmt "))
 print(container.container)
 ```
 
-TODO: Implement `Chunk` and add as many chunk parsers as possible.
+And once the `Chunk` parser is implemented, you can use it like so:
 
 ```py
 from raff import Chunk
+
 #: Initialize the chunk parser.
 chunk = Chunk(file)
 
-#: Iterate over each chunk (excluding the master/header chunk):
-for identifier, size, payload in chunk.get_chunks():
-    #: Chunk().get_chunks() would wrap over the Container() version 
-    #: and return a parsed payload dict rather than the raw bytes.
+#: Iterate over each chunk, with payloads parsed rather than raw.
+for identifier, size, parsed_payload in chunk.get_chunks():
+    #: Process the parsed chunk data...
     ...
+
 ```
