@@ -1,15 +1,16 @@
 `raff` is a Python library and command-line utility for extensive reading and parsing of IFF-based container formats.
 
-# Usage
+### Usage
 
 Install the package.
 
 ```$ pip install raff```
 
-Once installed, you can use the CLI tool directly from your terminal. Note: Currently, only the `--mode container` option is supported.
+To start with the CLI, run the following command to see the help message:
 
-Run the following command to see the help message:
-```bash
+Currently, only `--mode container` is supported. 
+
+```
 $ raff --help
 usage: raff [-h] [--mode {container,chunk}] [--ignore [IGNORE ...]] [--show-payload] [source]
 
@@ -32,7 +33,7 @@ options:
 
 Using the CLI with a file and the `--ignore` and `--show-payload` options:
 
-```bash
+```
 $ raff some_file.catalog --mode container --ignore STRS --show-payload 
 {
   "master": {
@@ -60,7 +61,7 @@ $ raff some_file.catalog --mode container --ignore STRS --show-payload
 
 Using the CLI with piped input:
 
-```bash
+```
 $ cat some_file.catalog | raff --mode container 
 {
   "master": {
