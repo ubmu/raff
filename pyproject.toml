@@ -1,0 +1,14 @@
+[project]
+name = "sniff"
+version = "0.1.0"
+description = "A library and utility for extensive parsing of IFF-based container formats."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "ruff>=0.11.2",
+]
