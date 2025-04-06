@@ -6,7 +6,7 @@ import sys
 from io import BytesIO
 from typing import Union
 
-from raff.container import Container
+from .container import Container
 
 
 def main():
