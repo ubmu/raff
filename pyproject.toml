@@ -1,10 +1,11 @@
 [project]
-name = "sniff"
+name = "raff"
 version = "0.1.0"
 description = "A library and utility for extensive parsing of IFF-based container formats."
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
+keywords = ["iff", "riff", "rf64", "rifx", "w64", "wave64", "bw64", "wave"]
 dependencies = []
 
 [dependency-groups]
@@ -15,10 +16,11 @@ dev = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["sniff"]
+where = ["raff"]
 
 [project.scripts]
-sniff = "sniff.cli:main"
+sniff = "raff.cli:main"
 
 [project.urls]
-Repository = "https://github.com/ubmu/sniff
+Repository = "https://github.com/ubmu/raff"
+

@@ -1,8 +1,8 @@
-`sniff` is a Python library and command-line utility for extensive reading and parsing of IFF-based container formats.
+`raff` is a Python library and command-line utility for extensive reading and parsing of IFF-based container formats.
 
 ```py
 #: Example usage:
-from sniff import Container
+from raff import Container
 
 #: File-like objects, raw bytes, or file paths are all valid inputs.
 file = "some_file.iff"
@@ -43,7 +43,7 @@ print(container.container)
 TODO: Implement `Chunk` and add as many chunk parsers as possible.
 
 ```py
-from sniff import Chunk
+from raff import Chunk
 #: Initialize the chunk parser.
 chunk = Chunk(file)
 
