@@ -3,7 +3,8 @@ name = "sniff"
 version = "0.1.0"
 description = "A library and utility for extensive parsing of IFF-based container formats."
 readme = "README.md"
-requires-python = ">=3.12"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
 dependencies = []
 
 [dependency-groups]
@@ -12,3 +13,12 @@ dev = [
     "pytest>=8.3.5",
     "ruff>=0.11.2",
 ]
+
+[tool.setuptools.packages.find]
+where = ["sniff"]
+
+[project.scripts]
+sniff = "sniff.cli:main"
+
+[project.urls]
+Repository = "https://github.com/ubmu/sniff

@@ -1,8 +1,8 @@
 `sniff` is a Python library and command-line utility for extensive reading and parsing of IFF-based container formats.
 
-
 ```py
 #: Example usage:
+from sniff import Container
 
 #: File-like objects, raw bytes, or file paths are all valid inputs.
 file = "some_file.iff"
@@ -43,14 +43,13 @@ print(container.container)
 TODO: Implement `Chunk` and add as many chunk parsers as possible.
 
 ```py
-#: Initialize the container reader.
-container = Container(file)
+from sniff import Chunk
 #: Initialize the chunk parser.
-chunk = Chunk()
+chunk = Chunk(file)
 
 #: Iterate over each chunk (excluding the master/header chunk):
-for identifier, size, payload in container.get_chunks():
-    #: Process each chunk (identifier, size, payload)
-    print(chunk.parse(identifier, size, payload))
+for identifier, size, payload in chunk.get_chunks():
+    #: Chunk().get_chunks() would wrap over the Container() version 
+    #: and return a parsed payload dict rather than the raw bytes.
     ...
 ```

@@ -2,8 +2,8 @@ import uuid
 
 from typing import Any, Dict, Generator, List, Tuple, Union
 
-from ._types import Byteorder
-from .stream import Source, Stream, normalize_source
+from sniff._types import Byteorder
+from sniff.stream import Source, Stream, normalize_source
 
 DEFAULT_ENCODING = "latin-1"
 FALSE_MSIZE = "0xffffffff"
